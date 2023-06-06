@@ -1,9 +1,24 @@
 import { useState } from "react";
 import * as LottiePlayer from "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { startGoogleSignIn } from "../../store/auth/thunks";
 
 export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const {
+    formState,
+    formState: { email, password },
+    onInputChange,
+    onResetForm,
+  } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleChange = (evt) => {
     const value = evt.target.value;
@@ -12,9 +27,18 @@ export const LoginPage = () => {
       [evt.target.name]: value,
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  const onGoogleSignIn = () => {
+    dispatch(startGoogleSignIn());
+  };
+
   return (
     <>
-      <section className="container mx-auto mt-40 grid md:grid-cols-2 items-center justify-center">
+      <section className="mx-10 mt-40 grid md:grid-cols-2 items-center justify-center">
         <picture>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -27,15 +51,19 @@ export const LoginPage = () => {
           ></lottie-player>
         </picture>
         <div className="flex flex-col">
-          <h1 className="text-2xl text-teal-500 font-bold">E-commerce</h1>
-          <form action="">
+          <h1 className="text-2xl text-teal-500 font-bold self-center">
+            FauxMart
+          </h1>
+          <form action="" onSubmit={handleSubmit}>
             <div className="relative my-6">
               <input
                 id="id-l10"
                 type="email"
-                name="id-l10"
+                name="email"
                 placeholder="Correo electrónico"
                 className="peer relative h-12 w-full border-b border-slate-200 px-4 text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-teal-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                value={email}
+                onChange={onInputChange}
               />
               <label
                 htmlFor="id-l10"
@@ -48,9 +76,11 @@ export const LoginPage = () => {
               <input
                 id="id-l14"
                 type={showPassword ? "text" : "password"}
-                name="id-l14"
+                name="password"
                 placeholder="Contraseña"
                 className="peer relative h-12 w-full border-b border-slate-200 px-4 pr-12 text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-teal-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                value={password}
+                onChange={onInputChange}
               />
               <label
                 htmlFor="id-l14"
@@ -105,12 +135,19 @@ export const LoginPage = () => {
                 </svg>
               )}
             </div>
-            <button className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none">
+            <button
+              className="h-10 mx-auto gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
+              type="submit"
+            >
               <span>Iniciar sesión</span>
             </button>
           </form>
-          <p className="mt-4">O inicia sesión con</p>
-          <button className="mt-4 flex justify-center">
+          <p className="mt-4 mx-auto">O inicia sesión con</p>
+          <button
+            className="mt-4 flex flex-col justify-center items-center"
+            type="button"
+            onClick={onGoogleSignIn}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="100"

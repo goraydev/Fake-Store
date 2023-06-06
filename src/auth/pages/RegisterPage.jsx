@@ -14,7 +14,7 @@ export const RegisterPage = () => {
   };
   return (
     <>
-      <section className="container mx-auto mt-40 grid md:grid-cols-2 items-center justify-center">
+      <section className="mx-10 mt-40 grid md:grid-cols-2 items-center justify-center">
         <picture>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player
@@ -24,7 +24,7 @@ export const RegisterPage = () => {
             autoplay
           ></lottie-player>
         </picture>
-        <div className="form flex flex-col">
+        <div className="flex flex-col">
           <h1 className="text-2xl text-teal-500 font-bold">Registrarse</h1>
           <form action="">
             <div className="relative my-6">
@@ -122,7 +122,6 @@ export const RegisterPage = () => {
               <span>Crear cuenta</span>
             </button>
           </form>
-          
 
           <span className="self-start mt-8">
             ¿Ya tiene cuenta? {""}
