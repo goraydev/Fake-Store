@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as LottiePlayer from "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (evt) => {
@@ -17,18 +17,31 @@ export const LoginPage = () => {
       <section className="container mx-auto mt-40 grid md:grid-cols-2 items-center justify-center">
         <picture>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player
-            src="https://assets1.lottiefiles.com/packages/lf20_5tkzkblw.json"
+            src="https://assets3.lottiefiles.com/packages/lf20_evuhbe40.json"
             background="transparent"
             speed="1"
-            loop
             autoplay
           ></lottie-player>
         </picture>
-        <div className="flex flex-col">
-          <h1 className="text-2xl text-teal-500 font-bold">E-commerce</h1>
+        <div className="form flex flex-col">
+          <h1 className="text-2xl text-teal-500 font-bold">Registrarse</h1>
           <form action="">
+            <div className="relative my-6">
+              <input
+                id="id-l04"
+                type="text"
+                name="id-l04"
+                placeholder="your name"
+                className="peer relative h-12 w-full border-b border-slate-200 px-4 text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-teal-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+              />
+              <label
+                htmlFor="id-l04"
+                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-teal-500 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+              >
+                Nombre completo
+              </label>
+            </div>
             <div className="relative my-6">
               <input
                 id="id-l10"
@@ -106,48 +119,15 @@ export const LoginPage = () => {
               )}
             </div>
             <button className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none">
-              <span>Iniciar sesión</span>
+              <span>Crear cuenta</span>
             </button>
           </form>
-          <p className="mt-4">O inicia sesión con</p>
-          <button className="mt-4 flex justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              preserveAspectRatio="xMidYMid"
-              viewBox="0 0 512 168"
-            >
-              <path
-                fill="#FF302F"
-                d="M496.052 102.672l14.204 9.469c-4.61 6.79-15.636 18.44-34.699 18.44-23.672 0-41.301-18.315-41.301-41.614 0-24.793 17.816-41.613 39.308-41.613 21.616 0 32.206 17.193 35.633 26.475l1.869 4.735-55.692 23.049c4.236 8.348 10.84 12.584 20.183 12.584 9.345 0 15.823-4.61 20.495-11.525zM452.384 87.66l37.19-15.45c-2.056-5.17-8.16-8.845-15.45-8.845-9.281 0-22.176 8.223-21.74 24.295z"
-              ></path>
-              <path
-                fill="#20B15A"
-                d="M407.407 4.931h17.94v121.85h-17.94V4.93z"
-              ></path>
-              <path
-                fill="#3686F7"
-                d="M379.125 50.593h17.318V124.6c0 30.711-18.128 43.357-39.558 43.357-20.183 0-32.33-13.58-36.878-24.606l15.885-6.604c2.865 6.79 9.78 14.827 20.993 14.827 13.767 0 22.24-8.535 22.24-24.482v-5.98h-.623c-4.112 4.983-11.961 9.468-21.928 9.468-20.807 0-39.87-18.128-39.87-41.488 0-23.486 19.063-41.8 39.87-41.8 9.905 0 17.816 4.423 21.928 9.282h.623v-5.98zm1.245 38.499c0-14.702-9.78-25.417-22.239-25.417-12.584 0-23.174 10.715-23.174 25.417 0 14.514 10.59 25.042 23.174 25.042 12.46.063 22.24-10.528 22.24-25.042z"
-              ></path>
-              <path
-                fill="#FF302F"
-                d="M218.216 88.78c0 23.984-18.688 41.613-41.613 41.613-22.924 0-41.613-17.691-41.613-41.613 0-24.108 18.689-41.675 41.613-41.675 22.925 0 41.613 17.567 41.613 41.675zm-18.19 0c0-14.95-10.84-25.23-23.423-25.23-12.583 0-23.423 10.28-23.423 25.23 0 14.826 10.84 25.23 23.423 25.23 12.584 0 23.423-10.404 23.423-25.23z"
-              ></path>
-              <path
-                fill="#FFBA40"
-                d="M309.105 88.967c0 23.984-18.689 41.613-41.613 41.613-22.925 0-41.613-17.63-41.613-41.613 0-24.108 18.688-41.613 41.613-41.613 22.924 0 41.613 17.443 41.613 41.613zm-18.253 0c0-14.95-10.839-25.23-23.423-25.23-12.583 0-23.423 10.28-23.423 25.23 0 14.826 10.84 25.23 23.423 25.23 12.646 0 23.423-10.466 23.423-25.23z"
-              ></path>
-              <path
-                fill="#3686F7"
-                d="M66.59 112.328c-26.102 0-46.534-21.056-46.534-47.158 0-26.101 20.432-47.157 46.534-47.157 14.079 0 24.357 5.544 31.957 12.646l12.522-12.521C100.479 7.984 86.338.258 66.59.258 30.833.259.744 29.414.744 65.17c0 35.758 30.089 64.912 65.846 64.912 19.312 0 33.889-6.354 45.289-18.19 11.711-11.712 15.324-28.158 15.324-41.489 0-4.174-.498-8.472-1.059-11.649H66.59v17.318h42.423c-1.246 10.84-4.672 18.253-9.718 23.298-6.105 6.168-15.76 12.958-32.705 12.958z"
-              ></path>
-            </svg>
-          </button>
+          
 
           <span className="self-start mt-8">
-            ¿No tiene cuenta? {""}
-            <Link to={"/registrarse"} className="hover:text-teal-500">
-              Registrese
+            ¿Ya tiene cuenta? {""}
+            <Link to={"/"} className="hover:text-teal-500">
+              Inicie sesión
             </Link>
           </span>
         </div>

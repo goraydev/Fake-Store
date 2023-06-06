@@ -10,4 +10,4 @@ export const appstoreSlice = createSlice({
     reducers: {}
 });
 
-export const { } = appstore.actions;
+export const { } = appstoreSlice.actions;
