@@ -35,13 +35,11 @@ export const RegisterPage = () => {
     dispatch(
       startCreatingUserWithEmailPassword({ email, password, displayName })
     );
-
-    
   };
 
   return (
     <>
-      <section className="mx-10 mt-40 grid md:grid-cols-2 items-center justify-center">
+      <section className="containerStore grid md:h-screen md:grid-cols-2 items-center justify-center">
         <picture>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player
@@ -52,7 +50,9 @@ export const RegisterPage = () => {
           ></lottie-player>
         </picture>
         <div className="flex flex-col">
-          <h1 className="text-2xl text-teal-500 font-bold">Registrarse</h1>
+          <h1 className="text-2xl text-teal-500 font-bold self-center">
+            Registrarse
+          </h1>
           <form action="" onSubmit={handleRegisterPage}>
             <div className="relative my-6">
               <input

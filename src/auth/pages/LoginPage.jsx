@@ -43,7 +43,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <section className="mx-10 mt-40 grid md:grid-cols-2 items-center justify-center">
+      <section className="containerStore grid md:h-screen md:grid-cols-2 items-center justify-center">
         <picture>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>

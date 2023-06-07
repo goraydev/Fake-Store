@@ -12,6 +12,7 @@
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.7.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "firebase": "^9.22.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
