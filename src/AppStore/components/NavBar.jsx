@@ -6,10 +6,8 @@ export const NavBar = () => {
   const { photoURL } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
   const handleLogout = () => {
     dispatch(logoutAction());
-    console.log('saliendo..')
   };
 
   return (
@@ -58,7 +56,23 @@ export const NavBar = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src={photoURL} />
+              {photoURL && <img src={photoURL} alt="user" />}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="44"
+                height="44"
+                fill="none"
+                stroke="#000"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                className="icon icon-tabler icon-tabler-user-circle"
+                viewBox="0 0 24 24"
+              >
+                <path stroke="none" d="M0 0h24v24H0z"></path>
+                <path d="M3 12a9 9 0 1018 0 9 9 0 10-18 0"></path>
+                <path d="M9 10a3 3 0 106 0 3 3 0 10-6 0M6.168 18.849A4 4 0 0110 16h4a4 4 0 013.834 2.855"></path>
+              </svg>
             </div>
           </label>
           <ul

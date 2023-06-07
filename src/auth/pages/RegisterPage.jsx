@@ -1,17 +1,44 @@
 import { useState } from "react";
 import * as LottiePlayer from "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks";
 
 export const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (evt) => {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
+  const dispatch = useDispatch();
+
+  const {
+    formState: { displayName, email, password },
+    formState,
+    onInputChange,
+    onResetForm,
+  } = useForm({
+    displayName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleRegisterPage = (e) => {
+    e.preventDefault();
+    if ([displayName, email, password].some((i) => i === "")) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Hay campos vacíos",
+      });
+    }
+
+    dispatch(
+      startCreatingUserWithEmailPassword({ email, password, displayName })
+    );
+
+    
   };
+
   return (
     <>
       <section className="mx-10 mt-40 grid md:grid-cols-2 items-center justify-center">
@@ -26,14 +53,16 @@ export const RegisterPage = () => {
         </picture>
         <div className="flex flex-col">
           <h1 className="text-2xl text-teal-500 font-bold">Registrarse</h1>
-          <form action="">
+          <form action="" onSubmit={handleRegisterPage}>
             <div className="relative my-6">
               <input
                 id="id-l04"
                 type="text"
-                name="id-l04"
-                placeholder="your name"
+                placeholder="Nombre completo"
                 className="peer relative h-12 w-full border-b border-slate-200 px-4 text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-teal-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                name="displayName"
+                value={displayName}
+                onChange={onInputChange}
               />
               <label
                 htmlFor="id-l04"
@@ -46,9 +75,11 @@ export const RegisterPage = () => {
               <input
                 id="id-l10"
                 type="email"
-                name="id-l10"
                 placeholder="Correo electrónico"
                 className="peer relative h-12 w-full border-b border-slate-200 px-4 text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-teal-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                name="email"
+                value={email}
+                onChange={onInputChange}
               />
               <label
                 htmlFor="id-l10"
@@ -61,9 +92,11 @@ export const RegisterPage = () => {
               <input
                 id="id-l14"
                 type={showPassword ? "text" : "password"}
-                name="id-l14"
                 placeholder="Contraseña"
                 className="peer relative h-12 w-full border-b border-slate-200 px-4 pr-12 text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-teal-500 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                name="password"
+                value={password}
+                onChange={onInputChange}
               />
               <label
                 htmlFor="id-l14"
@@ -118,7 +151,10 @@ export const RegisterPage = () => {
                 </svg>
               )}
             </div>
-            <button className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none">
+            <button
+              className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
+              type="submit"
+            >
               <span>Crear cuenta</span>
             </button>
           </form>

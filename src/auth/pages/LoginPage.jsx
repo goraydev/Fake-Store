@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as LottiePlayer from "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { useDispatch } from "react-redux";
-import { startGoogleSignIn } from "../../store/auth/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  startGoogleSignIn,
+  startLoginWithEmailPassword,
+} from "../../store/auth/thunks";
+import Swal from "sweetalert2";
 
 export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
+  const { errorMessage } = useSelector((state) => state.auth);
 
   const {
     formState,
@@ -20,18 +25,18 @@ export const LoginPage = () => {
     password: "",
   });
 
-  const handleChange = (evt) => {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    if ([email, password].some((input) => input === "")) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Hay campos vacíos",
+      });
+    }
 
+    dispatch(startLoginWithEmailPassword({ email, password }));
+  };
   const onGoogleSignIn = () => {
     dispatch(startGoogleSignIn());
   };
@@ -135,8 +140,26 @@ export const LoginPage = () => {
                 </svg>
               )}
             </div>
+
+            {errorMessage !== null &&
+              errorMessage.includes("wrong-password") && (
+                <div
+                  className="w-full px-4 py-3 text-sm text-pink-500 border border-pink-100 rounded bg-pink-50"
+                  role="alert"
+                >
+                  <p>Correo o Contraseña esta mal escrito</p>
+                </div>
+              )}
+            {errorMessage !== null && errorMessage.includes("not-found") && (
+              <div
+                className="w-full px-4 py-3 text-sm text-pink-500 border border-pink-100 rounded bg-pink-50"
+                role="alert"
+              >
+                <p>Usuario no existe</p>
+              </div>
+            )}
             <button
-              className="h-10 mx-auto gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
+              className="h-10 mx-auto gap-2 mt-3 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
               type="submit"
             >
               <span>Iniciar sesión</span>
