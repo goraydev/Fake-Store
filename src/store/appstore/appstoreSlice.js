@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 
-    allProducts: [],
     isLoading: false,
+    allProducts: [],
+    allCategories: [],
 }
 
 export const appstoreSlice = createSlice({
@@ -18,10 +19,14 @@ export const appstoreSlice = createSlice({
         getProducts: (state, { payload }) => {
             state.isLoading = false;
             state.allProducts = payload;
+        },
+
+        getCategories: (state, { payload }) => {
+            state.allCategories = payload;
         }
 
 
     }
 });
 
-export const { getProducts, loadingProducts } = appstoreSlice.actions;
+export const { getProducts, loadingProducts, getCategories } = appstoreSlice.actions;

@@ -1,23 +1,109 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutAction } from "../../store/auth/thunks";
+import {
+  startProductsByCategory,
+  startProductsByTitle,
+} from "../../store/appstore/thunks";
+import { useForm } from "../../hooks/useForm";
 
 export const NavBar = () => {
   const { photoURL } = useSelector((state) => state.auth);
+  const { allCategories } = useSelector((state) => state.appstore);
+
+  const {
+    formState: { search },
+    onInputChange,
+  } = useForm({
+    search: "",
+  });
 
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutAction());
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(startProductsByTitle(search));
+  };
+
   return (
-    <div className="navbar bg-teal-500">
-      <div className="flex-1">
+    <div className="navbar bg-teal-500 fixed top-0">
+      <div className="navbar-start">
+        <div className="dropdown block md:hidden">
+          <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a>Homepage</a>
+            </li>
+            <li>
+              <a>Portfolio</a>
+            </li>
+            <li>
+              <a>About</a>
+            </li>
+          </ul>
+        </div>
         <Link to={"/"} className="btn btn-ghost normal-case text-xl">
           FauxMart
         </Link>
       </div>
-      <div className="flex-none">
+      <div className="navbar-center hidden md:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li tabIndex={0}>
+            <details>
+              <summary>Categorias</summary>
+              <ul className="p-2">
+                {allCategories.map((category, index) => (
+                  <li key={index}>
+                    <Link
+                      to={`/productos/${category}`}
+                      onClick={() =>
+                        dispatch(startProductsByCategory(category))
+                      }
+                    >
+                      {category}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+
+      <div className="navbar-end">
+        <div className="form-control">
+          <form action="" onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Buscar por nombre"
+              className="input input-bordered w-24 md:w-auto"
+              name="search"
+              value={search}
+              onChange={onInputChange}
+            />
+          </form>
+        </div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <div className="indicator">

@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { startGetProducts } from "../../store/appstore/thunks";
+import {
+  startGetCategories,
+  startGetProducts,
+} from "../../store/appstore/thunks";
 import { useDispatch, useSelector } from "react-redux";
 
 export const ProductsCard = () => {
@@ -8,12 +11,13 @@ export const ProductsCard = () => {
 
   useEffect(() => {
     dispatch(startGetProducts());
+    dispatch(startGetCategories());
   }, []);
 
   return (
     <main className="containerStore">
       <div className="cards">
-        <ul className="cards_list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-10 ">
+        <ul className="cards_list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-24 mb-10">
           {!isLoading &&
             allProducts.map((product) => (
               <li key={product.id}>

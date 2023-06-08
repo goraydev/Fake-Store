@@ -16,6 +16,7 @@ export const AppRouter = () => {
       {status === "authenticated" ? (
         <>
           <Route path="/productos" element={<HomePage />} />
+          <Route path="/productos/:category" element={<HomePage />} />
           <Route path="/*" element={<Navigate to={"/productos"} />} />
         </>
       ) : (
