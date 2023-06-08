@@ -1,5 +1,5 @@
 import { fakeStoreAPI } from "../../API/fakeStoreAPI";
-import { getCategories, getProducts, loadingProducts } from "./appstoreSlice";
+import { getCategories, getOnlyProduct, getProducts, loadingProducts } from "./appstoreSlice";
 
 export const startGetProducts = () => {
     return async (dispatch, getState) => {
@@ -23,6 +23,16 @@ export const startProductsByTitle = (query) => {
 }
 
 
+
+export const startProductById = (id) => {
+    return async (dispatch, getSate) => {
+        dispatch(loadingProducts());
+        const { data } = await fakeStoreAPI.get(`/products/${id}`);
+        dispatch(getOnlyProduct(data));
+    }
+}
+
+
 export const startProductsByCategory = (category) => {
     return async (dispatch, getState) => {
 
@@ -38,7 +48,6 @@ export const startGetCategories = () => {
 
         const { data } = await fakeStoreAPI.get("/products/categories");
         dispatch(getCategories(data));
-
     }
 }
 

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logoutAction } from "../../store/auth/thunks";
 import {
   startProductsByCategory,
@@ -19,6 +19,8 @@ export const NavBar = () => {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(logoutAction());
   };
@@ -26,10 +28,11 @@ export const NavBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(startProductsByTitle(search));
+    navigate(`/productos/producto/${search}}`);
   };
 
   return (
-    <div className="navbar bg-teal-500 fixed top-0">
+    <div className="navbar bg-teal-500 fixed top-0 z-10">
       <div className="navbar-start">
         <div className="dropdown block md:hidden">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -76,7 +79,7 @@ export const NavBar = () => {
                 {allCategories.map((category, index) => (
                   <li key={index}>
                     <Link
-                      to={`/productos/${category}`}
+                      to={`/productos/categorias/${category}`}
                       onClick={() =>
                         dispatch(startProductsByCategory(category))
                       }

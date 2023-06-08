@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LoginPage, RegisterPage } from "../auth/pages";
-import { HomePage } from "../AppStore/pages";
-import { useSelector } from "react-redux";
+import { HomePage, CategoryPage, SearchPage } from "../AppStore/pages";
 import { useCheckOut } from "../hooks/useCheckOut";
+import { OneProduct } from "../AppStore/components";
 
 export const AppRouter = () => {
   const status = useCheckOut();
@@ -16,7 +16,12 @@ export const AppRouter = () => {
       {status === "authenticated" ? (
         <>
           <Route path="/productos" element={<HomePage />} />
-          <Route path="/productos/:category" element={<HomePage />} />
+          <Route
+            path="/productos/categorias/:category"
+            element={<CategoryPage />}
+          />
+          <Route path="/productos/producto/:search" element={<SearchPage />} />
+          <Route path="/producto/:id" element={<OneProduct />} />
           <Route path="/*" element={<Navigate to={"/productos"} />} />
         </>
       ) : (
