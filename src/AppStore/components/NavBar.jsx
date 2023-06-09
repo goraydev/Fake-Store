@@ -142,9 +142,9 @@ export const NavBar = () => {
                 Total: {sumTotalCart(myCart)}
               </span>
               <div className="card-actions">
-                <button className="btn bg-teal-500 btn-block">
+                <Link to={"/checkout"} className="btn bg-teal-500 btn-block">
                   Ver carrito
-                </button>
+                </Link>
               </div>
             </div>
           </div>

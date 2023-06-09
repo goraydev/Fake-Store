@@ -1,6 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LoginPage, RegisterPage } from "../auth/pages";
-import { HomePage, CategoryPage, SearchPage } from "../AppStore/pages";
+import {
+  HomePage,
+  CategoryPage,
+  SearchPage,
+  CheckoutPage,
+} from "../AppStore/pages";
 import { useCheckOut } from "../hooks/useCheckOut";
 import { OneProduct } from "../AppStore/components";
 
@@ -22,6 +27,7 @@ export const AppRouter = () => {
           />
           <Route path="/productos/producto/:search" element={<SearchPage />} />
           <Route path="/producto/:id" element={<OneProduct />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/*" element={<Navigate to={"/productos"} />} />
         </>
       ) : (
