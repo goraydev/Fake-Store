@@ -5,7 +5,8 @@ const initialState = {
     isLoading: false,
     allProducts: undefined,
     allCategories: [],
-    productActive: null
+    productActive: null,
+    myCart: []
 }
 
 export const appstoreSlice = createSlice({
@@ -28,15 +29,43 @@ export const appstoreSlice = createSlice({
             state.isLoading = false;
             state.allProducts = undefined;
             state.productActive = payload;
+            state.productActive.amount = 1;
+            state.productActive.total = state.productActive.price * state.productActive.amount;
         },
 
         getCategories: (state, { payload }) => {
             state.allCategories = payload;
             state.productActive = null;
+        },
+
+        increment: (state) => {
+            state.productActive.amount += 1;
+            state.productActive.total = state.productActive.price * state.productActive.amount;
+        },
+
+        decrement: (state) => {
+            state.productActive.amount = state.productActive.amount > 1 ? state.productActive.amount - 1 : 1;
+            state.productActive.total = state.productActive.price * state.productActive.amount;
+        },
+
+        startUpProducts: (state, { payload }) => {
+
+            const exist = state.myCart.some(product => product.id === state.productActive.id);
+            if (!exist) {
+                state.myCart.push(state.productActive);
+            }
+
         }
 
 
     }
 });
 
-export const { getProducts, loadingProducts, getCategories, getOnlyProduct } = appstoreSlice.actions;
+export const { getProducts,
+    loadingProducts,
+    getCategories,
+    getOnlyProduct,
+    increment,
+    decrement,
+    startUpProducts
+} = appstoreSlice.actions;
