@@ -6,7 +6,8 @@ const initialState = {
     allProducts: undefined,
     allCategories: [],
     productActive: null,
-    myCart: []
+    myCart: [],
+    productCartActive: null
 }
 
 export const appstoreSlice = createSlice({
@@ -55,6 +56,10 @@ export const appstoreSlice = createSlice({
                 state.myCart.push(state.productActive);
             }
 
+        },
+
+        startUpdateCart: (state, { payload }) => {
+            state.productCartActive = state.myCart.find(product => product.id === payload);
         }
 
 
@@ -67,5 +72,6 @@ export const { getProducts,
     getOnlyProduct,
     increment,
     decrement,
-    startUpProducts
+    startUpProducts,
+    startUpdateCart
 } = appstoreSlice.actions;
