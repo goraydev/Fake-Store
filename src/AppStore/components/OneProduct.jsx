@@ -22,7 +22,6 @@ export const OneProduct = () => {
   const { productActive } = useSelector((state) => state.appstore);
 
   const handleAddProduct = () => {
-    dispatch(startUpProducts());
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -30,6 +29,7 @@ export const OneProduct = () => {
       showConfirmButton: false,
       timer: 1500,
     });
+    dispatch(startUpProducts(productActive));
   };
 
   return (

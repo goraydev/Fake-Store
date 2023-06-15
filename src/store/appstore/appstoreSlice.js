@@ -7,7 +7,6 @@ const initialState = {
     allCategories: [],
     productActive: null,
     myCart: [],
-    productCartActive: null
 }
 
 export const appstoreSlice = createSlice({
@@ -53,13 +52,28 @@ export const appstoreSlice = createSlice({
 
             const exist = state.myCart.some(product => product.id === state.productActive.id);
             if (!exist) {
-                state.myCart.push(state.productActive);
-            }
 
+                state.myCart.push(payload);
+            }
         },
 
-        startUpdateCart: (state, { payload }) => {
+        startShowProductCart: (state, { payload }) => {
             state.productActive = state.myCart.find(product => product.id === payload);
+        },
+
+        startUpdateProduct: (state, { payload }) => {
+            state.myCart = state.myCart.map(product => {
+                if (product.id === payload.id) {
+                    return payload;
+                }
+
+                return product;
+            });
+        },
+
+        startDeleteProductCart: (state, { payload }) => {
+            state.myCart = state.myCart.filter(product => product.id !== payload);
+            state.productActive = null;
         }
 
 
@@ -73,5 +87,7 @@ export const { getProducts,
     increment,
     decrement,
     startUpProducts,
-    startUpdateCart
+    startShowProductCart,
+    startUpdateProduct,
+    startDeleteProductCart,
 } = appstoreSlice.actions;
