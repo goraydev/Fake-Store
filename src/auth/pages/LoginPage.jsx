@@ -159,7 +159,7 @@ export const LoginPage = () => {
               </div>
             )}
             <button
-              className="h-10 mx-auto gap-2 mt-3 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
+              className="h-10 gap-2 mt-3 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
               type="submit"
             >
               <span>Iniciar sesión</span>
@@ -167,7 +167,7 @@ export const LoginPage = () => {
           </form>
           <p className="mt-4 mx-auto">O inicia sesión con</p>
           <button
-            className="mt-4 flex flex-col justify-center items-center"
+            className="mt-4 flex flex-col p-2 justify-center items-center shadow-md shadow-slate-200"
             type="button"
             onClick={onGoogleSignIn}
           >
