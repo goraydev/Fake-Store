@@ -7,6 +7,8 @@ const initialState = {
     allCategories: [],
     productActive: null,
     myCart: [],
+    isSaving: false,
+    message: ""
 }
 
 export const appstoreSlice = createSlice({
@@ -48,6 +50,10 @@ export const appstoreSlice = createSlice({
             state.productActive.total = state.productActive.price * state.productActive.amount;
         },
 
+        setProductsCart: (state, { payload }) => {
+            state.myCart = payload.resp;
+        },
+
         startUpProducts: (state, { payload }) => {
 
             const exist = state.myCart.some(product => product.id === state.productActive.id);
@@ -62,6 +68,7 @@ export const appstoreSlice = createSlice({
         },
 
         startUpdateProduct: (state, { payload }) => {
+            state.isSaving = false;
             state.myCart = state.myCart.map(product => {
                 if (product.id === payload.id) {
                     return payload;
@@ -69,10 +76,22 @@ export const appstoreSlice = createSlice({
 
                 return product;
             });
+            state.message = "Actualizada correctamente"
         },
 
         startDeleteProductCart: (state, { payload }) => {
             state.myCart = state.myCart.filter(product => product.id !== payload);
+            state.productActive = null;
+        },
+        setSaving: (state) => {
+            state.isSaving = true;
+            state.message = ""
+        },
+
+        clearAllAppStore: (state) => {
+            state.isSaving = false;
+            state.message = "";
+            state.myCart = [];
             state.productActive = null;
         }
 
@@ -90,4 +109,7 @@ export const { getProducts,
     startShowProductCart,
     startUpdateProduct,
     startDeleteProductCart,
+    setSaving,
+    setProductsCart,
+    clearAllAppStore
 } = appstoreSlice.actions;

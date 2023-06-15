@@ -1,5 +1,17 @@
+import { deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { fakeStoreAPI } from "../../API/fakeStoreAPI";
-import { getCategories, getOnlyProduct, getProducts, loadingProducts } from "./appstoreSlice";
+import {
+    getCategories,
+    getOnlyProduct,
+    getProducts,
+    loadingProducts,
+    setProductsCart,
+    setSaving,
+    startDeleteProductCart,
+    startUpdateProduct
+} from "./appstoreSlice";
+import { FirebaseDB } from "../../firebase/config";
+import { loadProductsCart } from "../../helpers/loadProductsCart";
 
 export const startGetProducts = () => {
     return async (dispatch, getState) => {
@@ -52,3 +64,45 @@ export const startGetCategories = () => {
 }
 
 
+
+export const startLoadingProductsCart = () => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth;
+
+        const resp = await loadProductsCart(uid);
+
+        dispatch(setProductsCart({ resp }));
+
+    }
+};
+
+export const startSavingProduct = () => {
+    return async (dispatch, getState) => {
+        dispatch(setSaving());
+        const { uid } = getState().auth;
+        const { productActive } = getState().appstore;
+
+
+        const productToFireStore = { ...productActive }
+        delete productToFireStore.id;
+
+        const docRef = doc(FirebaseDB, `${uid}/fakestore/productsCart/${productActive.id}`);
+        await setDoc(docRef, productToFireStore, { merge: true });
+        dispatch(startUpdateProduct(productActive));
+
+    }
+}
+
+
+export const startDeletingProductCart = (id) => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth;
+
+        const docRef = doc(FirebaseDB, `${uid}/fakestore/productsCart/${id}`)
+        await deleteDoc(docRef);
+
+        dispatch(startDeleteProductCart(id))
+
+
+    }
+};

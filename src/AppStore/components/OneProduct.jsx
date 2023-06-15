@@ -2,7 +2,10 @@ import { useParams } from "react-router-dom";
 import { NavBar } from "./NavBar";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startProductById } from "../../store/appstore/thunks";
+import {
+  startProductById,
+  startSavingProduct,
+} from "../../store/appstore/thunks";
 import { Rating } from "./Rating";
 import {
   decrement,
@@ -30,6 +33,7 @@ export const OneProduct = () => {
       timer: 1500,
     });
     dispatch(startUpProducts(productActive));
+    dispatch(startSavingProduct());
   };
 
   return (

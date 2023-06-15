@@ -9,6 +9,10 @@ import {
   startShowProductCart,
   startUpdateProduct,
 } from "../../store/appstore/appstoreSlice";
+import {
+  startDeletingProductCart,
+  startSavingProduct,
+} from "../../store/appstore/thunks";
 
 export const CheckoutPage = () => {
   const { myCart, productActive } = useSelector((state) => state.appstore);
@@ -21,11 +25,11 @@ export const CheckoutPage = () => {
   };
 
   const handleUpdateProduct = () => {
-    dispatch(startUpdateProduct(productActive));
+    dispatch(startSavingProduct());
   };
 
   const handleDeleteProduct = (id) => {
-    dispatch(startDeleteProductCart(id));
+    dispatch(startDeletingProductCart(id));
   };
 
   return (
