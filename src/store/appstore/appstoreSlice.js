@@ -59,7 +59,7 @@ export const appstoreSlice = createSlice({
         },
 
         startUpdateCart: (state, { payload }) => {
-            state.productCartActive = state.myCart.find(product => product.id === payload);
+            state.productActive = state.myCart.find(product => product.id === payload);
         }
 
 
