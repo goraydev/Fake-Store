@@ -8,7 +8,8 @@ const initialState = {
     productActive: null,
     myCart: [],
     isSaving: false,
-    message: ""
+    message: "",
+    modal: false
 }
 
 export const appstoreSlice = createSlice({
@@ -93,7 +94,8 @@ export const appstoreSlice = createSlice({
             state.message = "";
             state.myCart = [];
             state.productActive = null;
-        }
+        },
+
 
 
     }
