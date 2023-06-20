@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { startShowProductCart } from "../../store/appstore/appstoreSlice";
 import { startDeletingProductCart } from "../../store/appstore/thunks";
 import { Modal } from "../components/Modal";
+import { PaymentMethod } from "../components/PaymentMethod";
 
 export const CheckoutPage = () => {
   const { myCart } = useSelector((state) => state.appstore);
@@ -25,7 +26,7 @@ export const CheckoutPage = () => {
       <NavBar />
       <Modal />
       <main className="containerStore">
-        <section className="mt-24 grid grid-cols-2">
+        <section className="mt-24 grid grid-cols-2 gap-10">
           <div className="myCart">
             <ul className="divide-y divide-slate-100 shadow-md shadow-slate-200">
               {myCart &&
@@ -86,7 +87,7 @@ export const CheckoutPage = () => {
               </li>
             </ul>
           </div>
-          <div className="checkout"></div>
+          <PaymentMethod />
         </section>
       </main>
     </>
