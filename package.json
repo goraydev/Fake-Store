@@ -12,6 +12,8 @@
   "dependencies": {
     "@lottiefiles/lottie-player": "^1.7.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.1",
     "axios": "^1.4.0",
     "firebase": "^9.22.1",
     "localforage": "^1.10.0",
