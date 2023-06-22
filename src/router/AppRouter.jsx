@@ -7,7 +7,7 @@ import {
   CheckoutPage,
 } from "../AppStore/pages";
 import { useCheckOut } from "../hooks/useCheckOut";
-import { OneProduct } from "../AppStore/components";
+import { OneProduct, PaymentCompleted } from "../AppStore/components";
 
 export const AppRouter = () => {
   const status = useCheckOut();
@@ -28,6 +28,7 @@ export const AppRouter = () => {
           <Route path="/productos/producto/:search" element={<SearchPage />} />
           <Route path="/producto/:id" element={<OneProduct />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/completed" element={<PaymentCompleted />} />
           <Route path="/*" element={<Navigate to={"/productos"} />} />
         </>
       ) : (

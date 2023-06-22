@@ -9,10 +9,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "./CheckoutForm";
 
 export const PaymentMethod = () => {
- 
-
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
-
   const options = {
     mode: "payment",
     amount: 1099,
@@ -25,9 +22,11 @@ export const PaymentMethod = () => {
 
   return (
     <div>
-      <Elements stripe={stripePromise} options={options}>
-        <CheckoutForm/>
-      </Elements>
+      {stripePromise && (
+        <Elements stripe={stripePromise} options={options}>
+          <CheckoutForm />
+        </Elements>
+      )}
     </div>
   );
 };
