@@ -53,7 +53,7 @@ export const startLoginWithEmailPassword = ({ email, password }) => {
 export const logoutAction = () => {
     return async (dispatch) => {
         await logoutFirebase();
-        dispatch(logout());
         dispatch(clearAllAppStore());
+        dispatch(logout());
     }
 }

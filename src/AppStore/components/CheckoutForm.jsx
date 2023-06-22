@@ -40,7 +40,7 @@ export const CheckoutForm = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: "http://localhost:5173/completed",
       },
     });
 

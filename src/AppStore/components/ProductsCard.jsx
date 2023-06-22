@@ -3,7 +3,6 @@ import * as LottiePlayer from "@lottiefiles/lottie-player";
 import {
   startGetCategories,
   startGetProducts,
-  startLoadingProductsCart,
 } from "../../store/appstore/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useParams } from "react-router-dom";
@@ -15,9 +14,8 @@ export const ProductsCard = () => {
 
   useEffect(() => {
     dispatch(startGetCategories());
-    if (pathname === "/productos") {
+    if (pathname === "/") {
       dispatch(startGetProducts());
-      dispatch(startLoadingProductsCart());
     }
   }, []);
 

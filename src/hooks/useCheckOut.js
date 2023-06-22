@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FirebaseAuth } from '../firebase/config';
 import { login, logout } from '../store/auth/authSlice';
+import { startGetCategories, startGetProducts, startLoadingProductsCart } from '../store/appstore/thunks';
 
 export const useCheckOut = () => {
     const { status } = useSelector((state) => state.auth);
@@ -14,6 +15,8 @@ export const useCheckOut = () => {
             if (!user) return dispatch(logout());
             const { uid, email, displayName, photoURL } = user;
             dispatch(login({ uid, email, displayName, photoURL }));
+            dispatch(startLoadingProductsCart());
+
         });
     }, []);
 

@@ -20,7 +20,8 @@ const firebaseConfig = {
     projectId: VITE_PROJECTID,
     storageBucket: VITE_STORAGEBUCKET,
     messagingSenderId: VITE_MESSAGINGSENDERID,
-    appId: VITE_APPID
+    appId: VITE_APPID,
+    measurementId: VITE_MEASUREMENTID,
 };
 
 export const FirebaseApp = initializeApp(firebaseConfig);

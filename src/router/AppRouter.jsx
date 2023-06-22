@@ -1,13 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { LoginPage, RegisterPage } from "../auth/pages";
-import {
-  HomePage,
-  CategoryPage,
-  SearchPage,
-  CheckoutPage,
-} from "../AppStore/pages";
 import { useCheckOut } from "../hooks/useCheckOut";
-import { OneProduct, PaymentCompleted } from "../AppStore/components";
+import { StoreRoutes } from "../AppStore/routes/StoreRoutes";
+import { AuthRoutes } from "../auth/routes/AuthRoutes";
 
 export const AppRouter = () => {
   const status = useCheckOut();
@@ -19,25 +13,11 @@ export const AppRouter = () => {
   return (
     <Routes>
       {status === "authenticated" ? (
-        <>
-          <Route path="/productos" element={<HomePage />} />
-          <Route
-            path="/productos/categorias/:category"
-            element={<CategoryPage />}
-          />
-          <Route path="/productos/producto/:search" element={<SearchPage />} />
-          <Route path="/producto/:id" element={<OneProduct />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/completed" element={<PaymentCompleted />} />
-          <Route path="/*" element={<Navigate to={"/productos"} />} />
-        </>
+        <Route path="/*" element={<StoreRoutes />} />
       ) : (
-        <>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/registrarse" element={<RegisterPage />} />
-          <Route path="/*" element={<Navigate to={"/"} />} />
-        </>
+        <Route path="/*" element={<AuthRoutes />} />
       )}
+      <Route path="/*" element={<Navigate to="login" />} />
     </Routes>
   );
 };

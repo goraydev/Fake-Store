@@ -13,7 +13,7 @@ export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { status, errorMessage } = useSelector((state) => state.auth);
 
   const {
     formState,
@@ -24,6 +24,7 @@ export const LoginPage = () => {
     email: "",
     password: "",
   });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
