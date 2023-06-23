@@ -1,4 +1,4 @@
-import { NavBar, OneProduct, ProductsCard } from "../components";
+import { NavBar, ProductsCard } from "../components";
 
 export const HomePage = () => {
   return (

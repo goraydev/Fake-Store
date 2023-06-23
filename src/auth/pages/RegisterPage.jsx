@@ -1,10 +1,10 @@
 import { useState } from "react";
 import * as LottiePlayer from "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks";
+import { useForm } from "../../hook/useForm";
 
 export const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);

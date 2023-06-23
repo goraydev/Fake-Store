@@ -1,14 +1,13 @@
 import axios from "axios";
-import { getEnvVariables } from "../helpers/getEnvVariables"
+import { getEnvironments } from "../helpers/getEnvironments"
 
 
-const { VITE_API_URL } = getEnvVariables();
+const { VITE_API_URL } = getEnvironments();
 
 
 export const fakeStoreAPI = axios.create({
     baseURL: VITE_API_URL,
 });
-
 
 
 

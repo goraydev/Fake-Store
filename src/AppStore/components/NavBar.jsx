@@ -5,7 +5,7 @@ import {
   startProductsByCategory,
   startProductsByTitle,
 } from "../../store/appstore/thunks";
-import { useForm } from "../../hooks/useForm";
+import { useForm } from "../../hook";
 import { sumTotalCart } from "../../helpers/sumTotalCart";
 
 export const NavBar = () => {

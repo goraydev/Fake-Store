@@ -1,15 +1,14 @@
-import { Provider } from "react-redux";
 import { AppRouter } from "./router/AppRouter";
-import { store } from "./store/store";
+import { AppTheme } from "./theme/AppTheme";
 
-function App() {
+function JournalApp() {
   return (
     <>
-      <Provider store={store}>
+      <AppTheme>
         <AppRouter />
-      </Provider>
+      </AppTheme>
     </>
   );
 }
 
-export default App;
+export default JournalApp;
