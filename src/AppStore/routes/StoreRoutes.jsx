@@ -1,6 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { CategoryPage, CheckoutPage, HomePage, SearchPage } from "../pages";
-import { OneProduct, PaymentCompleted } from "../components";
+import {
+  CategoryPage,
+  CheckoutPage,
+  HomePage,
+  PaymentCompleted,
+  SearchPage,
+} from "../pages";
+import { OneProduct } from "../components";
 
 export const StoreRoutes = () => {
   return (
@@ -13,7 +19,7 @@ export const StoreRoutes = () => {
       <Route path="/productos/producto/:search" element={<SearchPage />} />
       <Route path="/producto/:id" element={<OneProduct />} />
       <Route path="/checkout" element={<CheckoutPage />} />
-      <Route path="completed" element={<PaymentCompleted />} />
+      <Route path="/completed" element={<PaymentCompleted />} />
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
   );

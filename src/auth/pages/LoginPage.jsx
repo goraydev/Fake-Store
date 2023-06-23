@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import * as LottiePlayer from "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import {
   startGoogleSignIn,
   startLoginWithEmailPassword,
 } from "../../store/auth/thunks";
 import Swal from "sweetalert2";
+import { useForm } from "../../hook/useForm";
 
 export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +24,6 @@ export const LoginPage = () => {
     email: "",
     password: "",
   });
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
