@@ -13,7 +13,7 @@ export const CheckoutForm = () => {
 
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const { VITE_URL_PAY_COMPLETED } = getEnvironments();
+  const { VITE_URL_BACKEND, VITE_URL_PAY_COMPLETED } = getEnvironments();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +32,7 @@ export const CheckoutForm = () => {
     }
 
     // Create the PaymentIntent and obtain clientSecret
-    const res = await fetch("http://localhost:4000/create-intent", {
+    const res = await fetch(`${VITE_URL_BACKEND}/create-intent`, {
       method: "POST",
     });
 
