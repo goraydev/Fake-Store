@@ -5,12 +5,15 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { getEnvironments } from "../../helpers/getEnvironments";
 
 export const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const { VITE_URL_PAY_COMPLETED } = getEnvironments();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,7 +43,7 @@ export const CheckoutForm = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: "http://localhost:5173/completed",
+        return_url: `${VITE_URL_PAY_COMPLETED}`,
       },
     });
 
