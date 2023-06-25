@@ -120,7 +120,7 @@ export const OneProduct = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center py-4 gap-2 shadow-md shadow-slate-200">
+          <div className="flex flex-col items-center mb-10 py-4 gap-2 shadow-md shadow-slate-200">
             <h4 className="font-bold text-slate-700">Valoración</h4>
             <Rating />
             <span className="text-xs leading-6 text-slate-400">

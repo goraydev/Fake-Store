@@ -56,15 +56,16 @@ export const NavBar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>Homepage</a>
-            </li>
-            <li>
-              <a>Portfolio</a>
-            </li>
-            <li>
-              <a>About</a>
-            </li>
+            {allCategories.map((category, index) => (
+              <li key={index}>
+                <Link
+                  to={`/productos/categorias/${category}`}
+                  onClick={() => dispatch(startProductsByCategory(category))}
+                >
+                  {category}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <Link to={"/"} className="btn btn-ghost normal-case text-xl">
