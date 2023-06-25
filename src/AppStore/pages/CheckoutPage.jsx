@@ -26,7 +26,7 @@ export const CheckoutPage = () => {
       <NavBar />
       <Modal />
       <main className="containerStore">
-        <section className="mt-24 grid grid-cols-2 gap-10">
+        <section className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="myCart">
             <ul className="divide-y divide-slate-100 shadow-md shadow-slate-200">
               {myCart &&
