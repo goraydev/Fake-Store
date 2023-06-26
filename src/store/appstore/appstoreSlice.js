@@ -88,7 +88,6 @@ export const appstoreSlice = createSlice({
             state.isSaving = true;
             state.message = ""
         },
-
         clearAllAppStore: (state) => {
             state.isSaving = false;
             state.message = "";

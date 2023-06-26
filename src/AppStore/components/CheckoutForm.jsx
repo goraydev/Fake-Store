@@ -6,10 +6,14 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { getEnvironments } from "../../helpers/getEnvironments";
+import { useDispatch, useSelector } from "react-redux";
+import { startPaymentSuccessfull } from "../../store/appstore/thunks";
 
 export const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch();
+  const { myCart } = useSelector((state) => state.appstore);
 
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -38,6 +42,8 @@ export const CheckoutForm = () => {
 
     const { clientSecret } = await res.json();
 
+    dispatch(startPaymentSuccessfull());
+
     const { error } = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
       elements,
@@ -50,6 +56,8 @@ export const CheckoutForm = () => {
     if (error) {
       setErrorMessage(error.message);
     }
+
+    //dispatch(startPaymentSuccessfull());
   };
 
   return (
@@ -57,7 +65,7 @@ export const CheckoutForm = () => {
       <PaymentElement />
       <button
         type="submit"
-        disabled={!stripe || !elements}
+        disabled={!stripe || !elements || !myCart.length}
         className="h-10 gap-2 mt-3 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
       >
         Pagar

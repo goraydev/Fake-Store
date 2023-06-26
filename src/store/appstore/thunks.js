@@ -1,4 +1,4 @@
-import { deleteDoc, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { fakeStoreAPI } from "../../API/fakeStoreAPI";
 import {
     getCategories,
@@ -106,3 +106,18 @@ export const startDeletingProductCart = (id) => {
 
     }
 };
+
+
+export const startPaymentSuccessfull = () => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth;
+        const resp = await loadProductsCart(uid);
+        resp.forEach(async product => {
+            const productDocRef = doc(FirebaseDB, `${uid}/fakestore/productsCart/${product.id}`);
+            await deleteDoc(productDocRef);
+        })
+
+        console.log(resp)
+        //dispatch(setProductsCart({ resp }));
+    }
+}
