@@ -116,8 +116,5 @@ export const startPaymentSuccessfull = () => {
             const productDocRef = doc(FirebaseDB, `${uid}/fakestore/productsCart/${product.id}`);
             await deleteDoc(productDocRef);
         })
-
-        console.log(resp)
-        //dispatch(setProductsCart({ resp }));
     }
 }
