@@ -15,6 +15,7 @@ import { loadProductsCart } from "../../helpers/loadProductsCart";
 import { deleteUser, getAuth, updateProfile } from "firebase/auth";
 import { logoutAction } from "../auth/thunks";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { checkingCredentials, login } from "../auth/authSlice";
 
 export const startGetProducts = () => {
     return async (dispatch, getState) => {
@@ -126,133 +127,77 @@ export const startPaymentSuccessfull = () => {
 export const updateAccount = (name, photo) => {
     return async (dispatch, getState) => {
         const auth = getAuth();
-        const { displayName, photoURL } = getState().auth;
 
+        try {
+            if (name === "" && photo !== "") {
+                const refPhotoPerfil = ref(storage, photo.name);
 
-        if (name === "" && photo !== "") {
-            const refPhotoPerfil = ref(storage, photo.name);
+                const metadata = {
+                    contentType: 'image/jpeg',
+                };
 
-            const metadata = {
-                contentType: 'image/jpeg',
+                const snapshot = await uploadBytes(refPhotoPerfil, photo, metadata);
+                const url = await getDownloadURL(snapshot.ref);
+
+                await updateProfile(auth.currentUser, {
+                    displayName: getState().auth.displayName,
+                    photoURL: url,
+                });
+
+                const { uid, email, displayName, photoURL } = auth.currentUser;
+                dispatch(checkingCredentials());
+                setTimeout(() => {
+                    dispatch(login({ uid, email, displayName, photoURL }));
+                }, 1000);
+            } else if (name !== "" && photo !== "") {
+                const refPhotoPerfil = ref(storage, photo.name);
+
+                const metadata = {
+                    contentType: 'image/jpeg',
+                };
+
+                const snapshot = await uploadBytes(refPhotoPerfil, photo, metadata);
+                const url = await getDownloadURL(snapshot.ref);
+
+                await updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: url,
+                });
+
+                const { uid, email, displayName, photoURL } = auth.currentUser;
+                dispatch(checkingCredentials());
+                setTimeout(() => {
+                    dispatch(login({ uid, email, displayName, photoURL }));
+                }, 1000);
+            } else if (name !== "" && photo === "") {
+                await updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: getState().auth.photoURL,
+                });
+
+                const { uid, email, displayName, photoURL } = auth.currentUser;
+                dispatch(checkingCredentials());
+                setTimeout(() => {
+                    dispatch(login({ uid, email, displayName, photoURL }));
+                }, 1000);
             }
-
-            uploadBytes(refPhotoPerfil, photo, metadata).then((snapshot) => {
-                getDownloadURL(snapshot.ref)
-                    .then((url) => {
-
-
-
-                        updateProfile(auth.currentUser, {
-                            displayName: displayName, photoURL: url
-                        }).then(() => {
-                            console.log('actualizado')
-                        }).catch((error) => {
-                            console.error(error)
-                        });
-
-
-                    })
-                    .catch((error) => {
-                        // A full list of error codes is available at
-                        // https://firebase.google.com/docs/storage/web/handle-errors
-                        switch (error.code) {
-                            case 'storage/object-not-found':
-                                // File doesn't exist
-                                break;
-                            case 'storage/unauthorized':
-                                // User doesn't have permission to access the object
-                                break;
-                            case 'storage/canceled':
-                                // User canceled the upload
-                                break;
-
-                            // ...
-
-                            case 'storage/unknown':
-                                // Unknown error occurred, inspect the server response
-                                break;
-                        }
-                    });
-            });
-
-            return;
+        } catch (error) {
+            console.error(error);
         }
-
-        if (name !== "" && photo !== "") {
-            const refPhotoPerfil = ref(storage, photo.name);
-
-            const metadata = {
-                contentType: 'image/jpeg',
-            }
-
-            uploadBytes(refPhotoPerfil, photo, metadata).then((snapshot) => {
-                getDownloadURL(snapshot.ref)
-                    .then((url) => {
-
-
-
-                        updateProfile(auth.currentUser, {
-                            displayName: name, photoURL: url
-                        }).then(() => {
-                            console.log('actualizado')
-                        }).catch((error) => {
-                            console.error(error)
-                        });
-
-
-                    })
-                    .catch((error) => {
-                        // A full list of error codes is available at
-                        // https://firebase.google.com/docs/storage/web/handle-errors
-                        switch (error.code) {
-                            case 'storage/object-not-found':
-                                // File doesn't exist
-                                break;
-                            case 'storage/unauthorized':
-                                // User doesn't have permission to access the object
-                                break;
-                            case 'storage/canceled':
-                                // User canceled the upload
-                                break;
-
-                            // ...
-
-                            case 'storage/unknown':
-                                // Unknown error occurred, inspect the server response
-                                break;
-                        }
-                    });
-            });
-
-            return;
-        }
-
-        if (name !== "" && photo === "") {
-            updateProfile(auth.currentUser, {
-                displayName: name, photoURL: photoURL
-            }).then(() => {
-                console.log('actualizado')
-            }).catch((error) => {
-                console.error(error)
-            });
-
-        }
-
-
-
-    }
-}
+    };
+};
 
 
 export const deleteAccount = () => {
     return async (dispatch, getState) => {
-        const auth = getAuth();
-        const user = auth.currentUser;
+        try {
+            const auth = getAuth();
+            const user = auth.currentUser;
 
-        deleteUser(user).then(() => {
+            await deleteUser(user);
             dispatch(logoutAction());
-        }).catch((error) => {
-            console.error(error)
-        });
-    }
-}
+        } catch (error) {
+            console.error(error);
+        }
+    };
+};
