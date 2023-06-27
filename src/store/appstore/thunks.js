@@ -10,8 +10,11 @@ import {
     startDeleteProductCart,
     startUpdateProduct
 } from "./appstoreSlice";
-import { FirebaseDB } from "../../firebase/config";
+import { FirebaseDB, storage } from "../../firebase/config";
 import { loadProductsCart } from "../../helpers/loadProductsCart";
+import { deleteUser, getAuth, updateProfile } from "firebase/auth";
+import { logoutAction } from "../auth/thunks";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export const startGetProducts = () => {
     return async (dispatch, getState) => {
@@ -116,5 +119,140 @@ export const startPaymentSuccessfull = () => {
             const productDocRef = doc(FirebaseDB, `${uid}/fakestore/productsCart/${product.id}`);
             await deleteDoc(productDocRef);
         })
+    }
+}
+
+
+export const updateAccount = (name, photo) => {
+    return async (dispatch, getState) => {
+        const auth = getAuth();
+        const { displayName, photoURL } = getState().auth;
+
+
+        if (name === "" && photo !== "") {
+            const refPhotoPerfil = ref(storage, photo.name);
+
+            const metadata = {
+                contentType: 'image/jpeg',
+            }
+
+            uploadBytes(refPhotoPerfil, photo, metadata).then((snapshot) => {
+                getDownloadURL(snapshot.ref)
+                    .then((url) => {
+
+
+
+                        updateProfile(auth.currentUser, {
+                            displayName: displayName, photoURL: url
+                        }).then(() => {
+                            console.log('actualizado')
+                        }).catch((error) => {
+                            console.error(error)
+                        });
+
+
+                    })
+                    .catch((error) => {
+                        // A full list of error codes is available at
+                        // https://firebase.google.com/docs/storage/web/handle-errors
+                        switch (error.code) {
+                            case 'storage/object-not-found':
+                                // File doesn't exist
+                                break;
+                            case 'storage/unauthorized':
+                                // User doesn't have permission to access the object
+                                break;
+                            case 'storage/canceled':
+                                // User canceled the upload
+                                break;
+
+                            // ...
+
+                            case 'storage/unknown':
+                                // Unknown error occurred, inspect the server response
+                                break;
+                        }
+                    });
+            });
+
+            return;
+        }
+
+        if (name !== "" && photo !== "") {
+            const refPhotoPerfil = ref(storage, photo.name);
+
+            const metadata = {
+                contentType: 'image/jpeg',
+            }
+
+            uploadBytes(refPhotoPerfil, photo, metadata).then((snapshot) => {
+                getDownloadURL(snapshot.ref)
+                    .then((url) => {
+
+
+
+                        updateProfile(auth.currentUser, {
+                            displayName: name, photoURL: url
+                        }).then(() => {
+                            console.log('actualizado')
+                        }).catch((error) => {
+                            console.error(error)
+                        });
+
+
+                    })
+                    .catch((error) => {
+                        // A full list of error codes is available at
+                        // https://firebase.google.com/docs/storage/web/handle-errors
+                        switch (error.code) {
+                            case 'storage/object-not-found':
+                                // File doesn't exist
+                                break;
+                            case 'storage/unauthorized':
+                                // User doesn't have permission to access the object
+                                break;
+                            case 'storage/canceled':
+                                // User canceled the upload
+                                break;
+
+                            // ...
+
+                            case 'storage/unknown':
+                                // Unknown error occurred, inspect the server response
+                                break;
+                        }
+                    });
+            });
+
+            return;
+        }
+
+        if (name !== "" && photo === "") {
+            updateProfile(auth.currentUser, {
+                displayName: name, photoURL: photoURL
+            }).then(() => {
+                console.log('actualizado')
+            }).catch((error) => {
+                console.error(error)
+            });
+
+        }
+
+
+
+    }
+}
+
+
+export const deleteAccount = () => {
+    return async (dispatch, getState) => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        deleteUser(user).then(() => {
+            dispatch(logoutAction());
+        }).catch((error) => {
+            console.error(error)
+        });
     }
 }

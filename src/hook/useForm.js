@@ -10,12 +10,20 @@ export const useForm = (initialForm = {}) => {
         });
     };
 
+    const setFileInputValue = (name, file) => {
+        setFormState({
+            ...formState,
+            [name]: file,
+        });
+    };
+
     const onResetForm = () => {
         setFormState(initialForm);
     };
     return {
         ...formState,
         formState,
+        setFileInputValue,
         onInputChange,
         onResetForm,
     };

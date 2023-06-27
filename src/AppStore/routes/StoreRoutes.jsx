@@ -5,6 +5,8 @@ import {
   HomePage,
   PaymentCompleted,
   SearchPage,
+  SettingsUser,
+  UserPage,
 } from "../pages";
 import { OneProduct } from "../components";
 
@@ -20,6 +22,8 @@ export const StoreRoutes = () => {
       <Route path="/producto/:id" element={<OneProduct />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/completed" element={<PaymentCompleted />} />
+      <Route path="/user" element={<UserPage />} />
+      <Route path="/settings" element={<SettingsUser />} />
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
   );

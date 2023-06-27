@@ -9,7 +9,7 @@ import { useForm } from "../../hook";
 import { sumTotalCart } from "../../helpers/sumTotalCart";
 
 export const NavBar = () => {
-  const { photoURL } = useSelector((state) => state.auth);
+  const { photoURL, displayName } = useSelector((state) => state.auth);
   const { allCategories, myCart } = useSelector((state) => state.appstore);
 
   const {
@@ -177,16 +177,15 @@ export const NavBar = () => {
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link className="justify-between">
-                Profile
-                <span className="badge">New</span>
+              <Link to={"/user"} className="justify-between">
+                {displayName}
               </Link>
             </li>
             <li>
-              <Link>Settings</Link>
+              <Link to={"/settings"}>Ajustes</Link>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={handleLogout}>Cerrar sesión</button>
             </li>
           </ul>
         </div>
