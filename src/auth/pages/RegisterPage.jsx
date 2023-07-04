@@ -53,7 +53,7 @@ export const RegisterPage = () => {
           <h1 className="text-2xl text-teal-500 font-bold self-center">
             Registrarse
           </h1>
-          <form action="" onSubmit={handleRegisterPage}>
+          <form action="" onSubmit={handleRegisterPage} aria-label="form-register">
             <div className="relative my-6">
               <input
                 id="id-l04"

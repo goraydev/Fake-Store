@@ -87,6 +87,7 @@ export const CheckoutPage = () => {
               </li>
             </ul>
           </div>
+
           <PaymentMethod />
         </section>
       </main>

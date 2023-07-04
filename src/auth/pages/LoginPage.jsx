@@ -59,7 +59,7 @@ export const LoginPage = () => {
           <h1 className="text-2xl text-teal-500 font-bold self-center">
             FauxMart
           </h1>
-          <form action="" onSubmit={handleSubmit}>
+          <form action="" onSubmit={handleSubmit} aria-label="form-login">
             <div className="relative my-6">
               <input
                 id="id-l10"
