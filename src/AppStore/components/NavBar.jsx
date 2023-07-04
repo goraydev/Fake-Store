@@ -54,6 +54,7 @@ export const NavBar = () => {
           </label>
           <ul
             tabIndex={0}
+            aria-label="categories"
             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {allCategories.map((category, index) => (
@@ -98,7 +99,7 @@ export const NavBar = () => {
 
       <div className="navbar-end">
         <div className="form-control">
-          <form action="" onSubmit={handleSearch}>
+          <form action="" onSubmit={handleSearch} aria-label="form-search">
             <input
               type="text"
               placeholder="Buscar por nombre"

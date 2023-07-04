@@ -65,11 +65,14 @@ export const OneProduct = () => {
               <p>{productActive.description}</p>
               <p className="py-4 text-3xl">${productActive.price}</p>
               <div className="flex flex-col">
-                <div className="flex gap-4 items-center py-4">
+                <div
+                  className="flex gap-4 items-center py-4"
+                  aria-label="amount"
+                >
                   <p>Unidades</p>
                   <button
                     type="button"
-                    className="btn"
+                    className="btn less"
                     onClick={() => dispatch(decrement())}
                   >
                     <svg
@@ -87,10 +90,10 @@ export const OneProduct = () => {
                       />
                     </svg>
                   </button>
-                  {productActive.amount}
+                  <p>{productActive.amount}</p>
                   <button
                     type="button"
-                    className="btn"
+                    className="btn more"
                     onClick={() => dispatch(increment())}
                   >
                     <svg
