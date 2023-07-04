@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment } from "../../store/appstore/appstoreSlice";
 import { startSavingProduct } from "../../store/appstore/thunks";
 import { useRef } from "react";
+import { getEnvironments } from "../../helpers/getEnvironments";
 
 export const Modal = () => {
   const { productActive } = useSelector((state) => state.appstore);
@@ -10,7 +11,9 @@ export const Modal = () => {
 
   const hideModal = () => {
     if (modalRef.current) {
-      modalRef.current.close();
+      getEnvironments().VITE_MODE !== "FakeStore en testing"
+        ? modalRef.current.close()
+        : null;
     }
   };
 
@@ -78,6 +81,7 @@ export const Modal = () => {
                 </button>
               </div>
               <button
+                aria-label="btn-update"
                 type="button"
                 className="inline-flex items-center justify-center h-10 gap-2 px-5 text-sm font-medium tracking-wide text-white transition duration-300 rounded shadow-md focus-visible:outline-none whitespace-nowrap bg-teal-500 shadow-teal-200 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
                 onClick={handleUpdateProduct}
