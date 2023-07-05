@@ -7,13 +7,13 @@ Proyecto en la que se puede visualizar una gran variedad de productos, con barra
 ## Features
 
 - Responsive design
-- Pagos mediante Stripe
-- Integración con Firebase para el inicio de sesión
-- Uso de la API FakeStore
+- Procesamiento de pagos a través de Stripe
+- Autenticación de usuarios con Firebase
+- Utilización de la API FakeStore
 
 ## Installation
 
-Install my-project with npm
+Instalar mi proyecto con npm
 
 ```bash
   1. Necesitas tener nodejs instalado
