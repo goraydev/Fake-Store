@@ -33,8 +33,8 @@ export const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-teal-500 fixed top-0 z-10">
-      <div className="navbar-start">
+    <div className="navbar bg-teal-500 fixed top-0 z-10 flex flex-col md:flex-row">
+      <div className="navbar-start self-start">
         <div className="dropdown block md:hidden">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <svg
@@ -97,17 +97,18 @@ export const NavBar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end">
+      <div className="navbar-end w-full">
         <div className="form-control">
-          <form action="" onSubmit={handleSearch} aria-label="form-search">
+          <form action="" onSubmit={handleSearch} aria-label="form-search" className="flex">
             <input
               type="text"
               placeholder="Buscar por nombre"
-              className="input input-bordered w-24 md:w-auto"
+              className="input input-bordered w-full md:w-auto"
               name="search"
               value={search}
               onChange={onInputChange}
             />
+            <button className="btn btn-neutral">Buscar</button>
           </form>
         </div>
         <div className="dropdown dropdown-end">
