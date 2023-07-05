@@ -42,7 +42,7 @@ export const OneProduct = () => {
 
       {productActive && (
         <main className="containerStore">
-          <div className="mt-24 flex flex-col overflow-hidden bg-white rounded shadow-md text-slate-500 shadow-slate-200 sm:flex-row">
+          <div className="mt-36 flex flex-col overflow-hidden bg-white rounded shadow-md text-slate-500 shadow-slate-200 sm:flex-row">
             <figure className="flex-1">
               <img
                 src={productActive.image}

@@ -14,7 +14,7 @@ export const UserPage = () => {
     <>
       <NavBar />
       <main className="containerStore">
-        <div className=" mt-24 overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200">
+        <div className=" mt-36 overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200">
           <div className="p-6">
             <header className="mb-4 flex gap-4">
               <div className="relative inline-flex h-12 w-12 items-center justify-center rounded-full text-white">

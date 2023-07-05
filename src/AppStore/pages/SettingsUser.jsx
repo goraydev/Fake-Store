@@ -30,7 +30,7 @@ export const SettingsUser = () => {
     <>
       <NavBar />
       <main className="containerStore">
-        <section className="mt-24 p-4 shadow-md shadow-slate-200">
+        <section className="mt-36 p-4 shadow-md shadow-slate-200">
           <h2 className="text-center text-2xl mb-2">
             Actualizar datos de perfil
           </h2>

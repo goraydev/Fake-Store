@@ -26,7 +26,7 @@ export const CheckoutPage = () => {
       <NavBar />
       <Modal />
       <main className="containerStore">
-        <section className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <section className="mt-36 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="myCart">
             <ul className="divide-y divide-slate-100 shadow-md shadow-slate-200">
               {myCart &&
@@ -36,11 +36,13 @@ export const CheckoutPage = () => {
                     key={productCart.id}
                   >
                     <div className="flex shrink-0 items-center self-center">
-                      <img
-                        src={productCart.image}
-                        alt="product image"
-                        className="w-12 rounded"
-                      />
+                      <Link to={`/producto/${productCart.id}`}>
+                        <img
+                          src={productCart.image}
+                          alt="product image"
+                          className="w-12 rounded"
+                        />
+                      </Link>
                     </div>
 
                     <div className="flex min-h-[2rem] min-w-0 flex-1 flex-col items-start justify-center gap-0">
