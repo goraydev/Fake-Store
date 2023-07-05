@@ -32,7 +32,7 @@ export const startProductsByTitle = (query) => {
         dispatch(loadingProducts());
 
         const { data } = await fakeStoreAPI.get("/products");
-        const filterProducts = data.filter(product => product.title.toLowerCase().includes(query));
+        const filterProducts = data.filter(product => product.title.toLowerCase().includes(query.toLowerCase()));
         dispatch(getProducts(filterProducts));
 
     }
