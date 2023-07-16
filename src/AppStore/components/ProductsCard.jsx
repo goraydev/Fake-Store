@@ -20,14 +20,14 @@ export const ProductsCard = () => {
   }, []);
 
   return (
-    <main className="containerStore">
+    <main className="container mx-auto">
       <div className="cards">
         <ul className="cards_list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-36 mb-10">
           {!isLoading &&
             allProducts !== undefined &&
             allProducts.map((product) => (
               <li key={product.id}>
-                <div className="overflow-hidden  rounded bg-white text-slate-500 shadow-md shadow-slate-200">
+                <div className="overflow-hidden rounded bg-white text-slate-500 shadow-md shadow-slate-200 h-full flex flex-col justify-between items-stretch">
                   <figure>
                     <img
                       src={product.image}
