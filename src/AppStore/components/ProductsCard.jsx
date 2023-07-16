@@ -20,7 +20,7 @@ export const ProductsCard = () => {
   }, []);
 
   return (
-    <main className="container mx-auto">
+    <main className="containerStore md:container md:mx-auto">
       <div className="cards">
         <ul className="cards_list grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-36 mb-10">
           {!isLoading &&

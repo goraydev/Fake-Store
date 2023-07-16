@@ -34,8 +34,8 @@ export const NavBar = () => {
 
   return (
     <nav className="navbar bg-teal-500 fixed top-0 z-10">
-      <div className="container mx-auto navbar">
-        <div className="navbar-start self-start container">
+      <div className="container mx-auto navbar flex flex-col md:flex-row">
+        <div className="navbar-start self-start">
           <div className="dropdown block md:hidden">
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <svg
@@ -109,12 +109,12 @@ export const NavBar = () => {
               <input
                 type="text"
                 placeholder="Buscar por nombre"
-                className="input input-bordered w-full md:w-auto"
+                className="input input-bordered rounded-r-none  w-full md:w-auto"
                 name="search"
                 value={search}
                 onChange={onInputChange}
               />
-              <button className="btn btn-neutral">Buscar</button>
+              <button className="btn btn-neutral rounded-l-none">Buscar</button>
             </form>
           </div>
           <div className="dropdown dropdown-end">
