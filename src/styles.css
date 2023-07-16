@@ -7,3 +7,15 @@
   width: 1200px;
   margin: 0 auto;
 }
+
+.animation {
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+@media (min-width:768px){
+  .animation{
+    width: 100%;
+  }
+}

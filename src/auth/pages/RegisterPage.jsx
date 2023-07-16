@@ -40,7 +40,7 @@ export const RegisterPage = () => {
   return (
     <>
       <section className="containerStore grid md:h-screen md:grid-cols-2 items-center justify-center">
-        <picture>
+        <picture className="animation">
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player
             src="https://assets3.lottiefiles.com/packages/lf20_evuhbe40.json"
@@ -152,7 +152,7 @@ export const RegisterPage = () => {
               )}
             </div>
             <button
-              className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
+              className="inline-flex w-full h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
               type="submit"
             >
               <span>Crear cuenta</span>

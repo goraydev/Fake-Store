@@ -43,8 +43,8 @@ export const LoginPage = () => {
 
   return (
     <>
-      <section className="containerStore grid md:h-screen md:grid-cols-2 items-center justify-center">
-        <picture>
+      <section className="containerStore md:container mx-auto  grid md:h-screen md:grid-cols-2 items-center justify-center">
+        <picture className="animation">
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player
@@ -159,7 +159,7 @@ export const LoginPage = () => {
               </div>
             )}
             <button
-              className="h-10 gap-2 mt-3 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
+              className="h-10 w-full gap-2 mt-3 whitespace-nowrap rounded bg-teal-500 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-teal-200 transition duration-300 hover:bg-teal-600 hover:shadow-sm hover:shadow-teal-200 focus:bg-teal-700 focus:shadow-sm focus:shadow-teal-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-teal-300 disabled:bg-teal-300 disabled:shadow-none"
               type="submit"
             >
               <span>Iniciar sesión</span>
@@ -206,7 +206,7 @@ export const LoginPage = () => {
 
           <span className="self-start mt-8">
             ¿No tiene cuenta? {""}
-            <Link to={"/registrarse"} className="hover:text-teal-500">
+            <Link to={"/registrarse"} className="underline underline-offset-2 hover:text-teal-500">
               Registrese
             </Link>
           </span>
